@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WakaûndūVibez Stream</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090711;color:white;font-family:Arial,sans-serif}
+header{padding:24px 18px;background:linear-gradient(130deg,#251044,#101020);border-bottom:1px solid #a855f7}
+h1{color:#e5baff;margin:0;font-size:25px}
+header p{color:#c7b8d9}
+main{max-width:850px;margin:auto;padding:18px}
+.card{background:#171326;border:1px solid #493363;border-radius:15px;padding:18px;margin:15px 0}
+h2{color:#d7a5ff;font-size:19px}
+.channel{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid #383044}
+.channel:last-child{border:0}
+input[type=checkbox]{width:21px;height:21px;accent-color:#a855f7}
+input[type=text],input[type=password]{width:100%;padding:13px;margin:7px 0;background:#090711;color:white;border:1px solid #65458a;border-radius:8px}
+button{padding:14px;border:0;border-radius:9px;background:#a855f7;color:white;font-weight:bold;width:100%;margin:7px 0;font-size:15px}
+button.stop{background:#bd3159}
+button:disabled{opacity:.5}
+.status{color:#f6cf68;font-size:13px}
+.big{font-size:27px;color:#e8c5ff;font-weight:bold}
+small{color:#aaa}
+footer{text-align:center;color:#888;padding:25px}
+</style>
+</head>
+<body>
+<header>
+<h1>WAKAÛNDŪVIBEZ STREAM</h1>
+<p>CREATE ONCE. BROADCAST EVERYWHERE.</p>
+</header>
+<main>
+<div class="card">
+<h2>Studio Dashboard</h2>
+<div class="big" id="count">0 CHANNELS</div>
+<p class="status" id="status">Streaming server not connected</p>
+</div>
+
+<div class="card">
+<h2>Choose destinations</h2>
+<div class="channel">
+<label for="youtube">▶ YouTube Live</label>
+<input type="checkbox" id="youtube">
+</div>
+<div class="channel">
+<label for="tiktok">♪ TikTok LIVE</label>
+<input type="checkbox" id="tiktok">
+</div>
+<div class="channel">
+<label for="facebook">f Facebook Live</label>
+<input type="checkbox" id="facebook">
+</div>
+<div class="channel">
+<label for="custom">＋ Custom RTMP</label>
+<input type="checkbox" id="custom">
+</div>
+</div>
+
+<div class="card">
+<h2>Broadcast controls</h2>
+<label>Stream title</label>
+<input type="text" id="title" placeholder="My live broadcast">
+<button id="start" onclick="startStream()">GO LIVE</button>
+<button class="stop" onclick="stopStream()">STOP STREAM</button>
+<p class="status" id="message">Ready for server connection.</p>
+<small>This dashboard is a front-end prototype. Live transmission requires a connected streaming relay.</small>
+</div>
+
+<div class="card">
+<h2>Streaming connection</h2>
+<p>Server connection: <span class="status">Not configured</span></p>
+<p>Keep platform stream keys private. Never paste them into public GitHub files.</p>
+</div>
+
+<div class="card">
+<h2>Coming to your studio</h2>
+<p>• Multiple simultaneous broadcasts</p>
+<p>• Live stream monitoring</p>
+<p>• Cloud streaming relay</p>
+<p>• Mobile camera and microphone</p>
+<p>• Custom RTMP destinations</p>
+</div>
+</main>
+<footer>WakaûndūVibez Stream © 2026</footer>
+<script>
+const ids=["youtube","tiktok","facebook","custom"];
+function update(){
+let n=ids.filter(id=>document.getElementById(id).checked).length;
+document.getElementById("count").textContent=n+" CHANNELS";
+}
+ids.forEach(id=>document.getElementById(id).addEventListener("change",update));
+function startStream(){
+let n=ids.filter(id=>document.getElementById(id).checked).length;
+let msg=document.getElementById("message");
+if(!n){msg.textContent="Select at least one destination.";return;}
+msg.textContent="Server connection required. No broadcast has started.";
+}
+function stopStream(){
+document.getElementById("message").textContent="No active broadcast.";
+}
+</script>
+</body>
+</html>
